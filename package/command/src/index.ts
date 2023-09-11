@@ -9,6 +9,7 @@ import pkg from '../package.json'
 import { exec } from './exec'
 
 const program = new Command()
+const cwd = process.cwd()
 
 program
   .name(pkg.name)
@@ -20,7 +21,7 @@ program
   .arguments('projectName')
   .description('create a web project')
   .action(async (projectName: string) => {
-    const targetPath = resolve(process.cwd(), projectName)
+    const targetPath = resolve(cwd, projectName)
     await mkdir(targetPath)
     try {
       const templatePath = resolve(__dirname, 'template')
@@ -35,12 +36,17 @@ program
   .command('install')
   .description('Install dependencies')
   .action(async () => {
-    const cwd = process.cwd()
     const targetpath = resolve(cwd, '.react-web')
     await exec({ cli: 'ni', cwd: targetpath })
+
     const linkSourcePath = resolve(targetpath, 'node_modules')
     const linkTargetPath = resolve(cwd, 'node_modules')
     await symlink(linkSourcePath, linkTargetPath)
   })
+
+program
+  .command('start')
+  .description('run project')
+  .action(() => { })
 
 program.parse()
