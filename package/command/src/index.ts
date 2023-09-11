@@ -30,4 +30,9 @@ program
     }
   })
 
+program
+  .command('start')
+  .description('run project')
+  .action(() => { })
+
 program.parse()
