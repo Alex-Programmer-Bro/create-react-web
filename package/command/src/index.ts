@@ -4,8 +4,9 @@ import process from 'node:process'
 import { mkdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Command } from 'commander'
-import { copySync } from 'fs-extra'
+import { copySync, symlink } from 'fs-extra'
 import pkg from '../package.json'
+import { exec } from './exec'
 
 const program = new Command()
 
@@ -31,8 +32,15 @@ program
   })
 
 program
-  .command('start')
-  .description('run project')
-  .action(() => { })
+  .command('install')
+  .description('Install dependencies')
+  .action(async () => {
+    const cwd = process.cwd()
+    const targetpath = resolve(cwd, '.react-web')
+    await exec({ cli: 'ni', cwd: targetpath })
+    const linkSourcePath = resolve(targetpath, 'node_modules')
+    const linkTargetPath = resolve(cwd, 'node_modules')
+    await symlink(linkSourcePath, linkTargetPath)
+  })
 
 program.parse()

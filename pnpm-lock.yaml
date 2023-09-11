@@ -24,7 +24,7 @@ importers:
         specifier: ^0.41.0
         version: 0.41.0(eslint@8.49.0)(typescript@5.2.2)
       '@antfu/ni':
-        specifier: ^0.21.6
+        specifier: ^0.21.8
         version: 0.21.8
       '@antfu/utils':
         specifier: ^0.7.6

@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "install": "crw install",
     "start": "crw start",
     "build": "crw build"
   }
