@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "pnpm -r --filter react-web start",
     "test": "pnpm -r --filter react-web test",
     "build": "pnpm -r --filter react-web build",
     "lint": "pnpm -r --filter react-web lint",
