@@ -35,16 +35,20 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "crw": "./dist/index.cjs"
+  },
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "unbuild && npm run copyTmp",
+    "dev": "unbuild --stub && npm run copyTmp",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
+    "start": "esno src/index.ts && npm run copyTmp",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "copyTmp": "copy-folder ../template dist/template"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.41.0",
@@ -68,5 +72,8 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "copy-folder-util": "^1.1.1"
   }
 }
