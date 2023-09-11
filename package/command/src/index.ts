@@ -47,6 +47,17 @@ program
 program
   .command('start')
   .description('run project')
-  .action(() => { })
+  .action(async () => {
+    const targetpath = resolve(cwd, '.react-web')
+    await exec({ cli: 'npm run dev', cwd: targetpath })
+  })
+
+program
+  .command('build')
+  .description('build project')
+  .action(async () => {
+    const targetpath = resolve(cwd, '.react-web')
+    await exec({ cli: 'npm run build', cwd: targetpath })
+  })
 
 program.parse()
