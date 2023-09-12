@@ -30,7 +30,7 @@ jobs:
         run: pnpm build
 
       - name: Publish
-        run: 
+        run: |
           cd package/command
           pnpm publish --access public
         env:
