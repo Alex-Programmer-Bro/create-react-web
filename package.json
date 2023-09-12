@@ -9,6 +9,6 @@
     "lint": "pnpm -r --filter react-web-command lint",
     "typecheck": "pnpm -r --filter react-web-command typecheck",
     "lint-staged": "pnpm -r --filter react-web-command lint-staged",
-    "publish": "pnpm -r --filter react-web-command publish"
+    "publish": "cd package/command && pnpm publish"
   }
 }
