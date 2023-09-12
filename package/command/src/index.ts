@@ -26,7 +26,6 @@ program
     try {
       const templatePath = resolve(__dirname, 'template')
       copySync(templatePath, targetPath)
-      await exec({ cli: 'npm run install', cwd: targetPath })
     }
     catch (err) {
       console.error(err)

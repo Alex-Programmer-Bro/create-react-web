@@ -1,0 +1,37 @@
+name: Node.js Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Test
+        env:
+          FIREBASE_REALTIME_DATABASE_URL: ${{ secrets.DATABASEURL }}
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish
+        run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

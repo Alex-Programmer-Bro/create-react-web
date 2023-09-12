@@ -8,6 +8,7 @@
     "build": "pnpm -r --filter react-web-command build",
     "lint": "pnpm -r --filter react-web-command lint",
     "typecheck": "pnpm -r --filter react-web-command typecheck",
-    "lint-staged": "pnpm -r --filter react-web-command lint-staged"
+    "lint-staged": "pnpm -r --filter react-web-command lint-staged",
+    "publish": "pnpm -r --filter react-web-command publish"
   }
 }
