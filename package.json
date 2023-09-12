@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "pnpm -r --filter react-web test",
-    "build": "pnpm -r --filter react-web build",
-    "lint": "pnpm -r --filter react-web lint",
-    "typecheck": "pnpm -r --filter react-web typecheck",
-    "lint-staged": "pnpm -r --filter react-web lint-staged"
+    "test": "pnpm -r --filter react-web-command test",
+    "build": "pnpm -r --filter react-web-command build",
+    "lint": "pnpm -r --filter react-web-command lint",
+    "typecheck": "pnpm -r --filter react-web-command typecheck",
+    "lint-staged": "pnpm -r --filter react-web-command lint-staged"
   }
 }

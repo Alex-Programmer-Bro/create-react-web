@@ -1,7 +1,7 @@
 {
-  "name": "react-web",
+  "name": "react-web-command",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@8.7.0",
   "description": "_description_",
   "license": "MIT",
