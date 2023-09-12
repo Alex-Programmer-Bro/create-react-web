@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import process from 'node:process'
-import { mkdir, readFile, rmdir, stat } from 'node:fs/promises'
+import { mkdir, readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Command } from 'commander'
 import { copySync, symlink, unlink } from 'fs-extra'
 import pkg from '../package.json'
-import { exec } from './exec'
+import { exec } from './tool'
 
 const program = new Command()
 const cwd = process.cwd()
