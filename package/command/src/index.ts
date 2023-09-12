@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import process from 'node:process'
-import { mkdir, readFile, stat } from 'node:fs/promises'
+import { mkdir, readFile, rmdir, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Command } from 'commander'
 import { copySync, symlink, unlink } from 'fs-extra'
@@ -26,6 +26,7 @@ program
     try {
       const templatePath = resolve(__dirname, 'template')
       copySync(templatePath, targetPath)
+      await exec({ cli: 'npm run install', cwd: targetPath })
     }
     catch (err) {
       console.error(err)
@@ -39,7 +40,16 @@ program
     const targetpath = resolve(cwd, '.react-web')
     await exec({ cli: 'ni', cwd: targetpath })
     const linkSourcePath = resolve(targetpath, 'node_modules')
-    const linkTargetPath = resolve(cwd, 'node_modules')
+    const linkTargetPath = resolve(cwd, 'src', 'node_modules')
+
+    try {
+      const targetStat = await stat(linkTargetPath)
+      targetStat.isDirectory() && await unlink(linkTargetPath)
+    }
+    catch (error) {
+
+    }
+
     await symlink(linkSourcePath, linkTargetPath)
   })
 
