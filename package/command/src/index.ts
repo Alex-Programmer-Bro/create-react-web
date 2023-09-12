@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import process from 'node:process'
-import { mkdir, readFile, rmdir, stat } from 'node:fs/promises'
+import { mkdir, readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Command } from 'commander'
 import { copySync, symlink, unlink } from 'fs-extra'
@@ -19,7 +19,7 @@ program
 program
   .command('create')
   .arguments('projectName')
-  .description('create a web project')
+  .description('Create a web project')
   .action(async (projectName: string) => {
     const targetPath = resolve(cwd, projectName)
     await mkdir(targetPath)
@@ -53,7 +53,7 @@ program
 
 program
   .command('build')
-  .description('build project')
+  .description('Build project')
   .action(async () => {
     const targetpath = resolve(cwd, '.react-web')
     await exec({ cli: 'npm run build', cwd: targetpath })
@@ -61,7 +61,7 @@ program
 
 program
   .command('preview')
-  .description('preview project')
+  .description('Preview project')
   .action(async () => {
     const targetpath = resolve(cwd, '.react-web')
     await exec({ cli: 'npm run build && npm run preview', cwd: targetpath })
