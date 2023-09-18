@@ -1,4 +1,5 @@
 {
+  "name": "web",
   "scripts": {
     "install": "crw install",
     "start": "crw start",
