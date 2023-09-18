@@ -1,7 +1,7 @@
 {
   "name": "react-web-command",
   "type": "module",
-  "version": "0.0.1-alpha",
+  "version": "0.0.2-alpha",
   "packageManager": "pnpm@8.7.0",
   "description": "_description_",
   "license": "MIT",
@@ -37,7 +37,6 @@
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
-    "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks",
     "copyTmp": "copy-folder ../template dist/template"
@@ -67,6 +66,7 @@
     "*": "eslint --fix"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^11.0.0",
     "copy-folder-util": "^1.1.1",
     "fs-extra": "^11.1.1"

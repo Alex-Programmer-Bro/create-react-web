@@ -12,3 +12,5 @@ export function exec({ cli, params = [], cwd = process.cwd() }: { cli: string; p
     })
   })
 }
+
+export const log = console.log

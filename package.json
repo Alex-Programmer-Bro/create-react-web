@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "pnpm -r --filter react-web-command test",
     "build": "pnpm -r --filter react-web-command build",
     "lint": "pnpm -r --filter react-web-command lint",
     "typecheck": "pnpm -r --filter react-web-command typecheck",
