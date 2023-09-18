@@ -5,11 +5,14 @@ import { mkdir, readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Command } from 'commander'
 import { copySync, symlink, unlink } from 'fs-extra'
+import chalk from 'chalk'
 import pkg from '../package.json'
-import { exec } from './tool'
+import { exec, log } from './tool'
 
 const program = new Command()
 const cwd = process.cwd()
+const appRootName = '.app'
+const appRootPath = resolve(cwd, appRootName)
 
 program
   .name(pkg.name)
@@ -26,6 +29,19 @@ program
     try {
       const templatePath = resolve(__dirname, 'template')
       copySync(templatePath, targetPath)
+      await exec({ cli: 'ni', cwd: targetPath })
+      log(`
+  ${chalk.green.bold(`${projectName} Successfully Created!`)}
+
+  ${chalk.cyan('Navigate to the Project:')}
+  ${chalk.yellow.bold(`cd ${projectName}`)}
+
+  ${chalk.blue('Run the Project:')}
+  ${chalk.green('npm start')}
+  
+  ${(chalk.magenta('Build the Project:'))}
+  ${(chalk.green('npm run test'))}
+`)
     }
     catch (err) {
       console.error(err)
@@ -36,9 +52,8 @@ program
   .command('install')
   .description('Install dependencies')
   .action(async () => {
-    const targetpath = resolve(cwd, '.react-web')
-    await exec({ cli: 'ni', cwd: targetpath })
-    const linkSourcePath = resolve(targetpath, 'node_modules')
+    await exec({ cli: 'ni', cwd: appRootPath })
+    const linkSourcePath = resolve(appRootPath, 'node_modules')
     const linkTargetPath = resolve(cwd, 'src', 'node_modules')
 
     try {
@@ -46,34 +61,31 @@ program
       targetStat.isDirectory() && await unlink(linkTargetPath)
     }
     catch (error) {
-
     }
 
     await symlink(linkSourcePath, linkTargetPath)
+    log(chalk.blue(`Symbolic link created ${linkSourcePath} -> ${linkTargetPath}`))
   })
 
 program
   .command('start')
   .description('run project')
   .action(async () => {
-    const targetpath = resolve(cwd, '.react-web')
-    await exec({ cli: 'npm run dev', cwd: targetpath })
+    await exec({ cli: 'npm run dev', cwd: appRootPath })
   })
 
 program
   .command('build')
   .description('Build project')
   .action(async () => {
-    const targetpath = resolve(cwd, '.react-web')
-    await exec({ cli: 'npm run build', cwd: targetpath })
+    await exec({ cli: 'npm run build', cwd: appRootPath })
   })
 
 program
   .command('preview')
   .description('Preview project')
   .action(async () => {
-    const targetpath = resolve(cwd, '.react-web')
-    await exec({ cli: 'npm run build && npm run preview', cwd: targetpath })
+    await exec({ cli: 'npm run build && npm run preview', cwd: appRootPath })
   })
 
 async function checkDevStack() {
@@ -91,17 +103,15 @@ async function checkDevStack() {
     if (!Object.values(pkg.scripts as Record<string, string>).some(scripts => scripts.split(' ').includes('crw')))
       return
 
-    const targetPath = resolve(cwd, '.react-web')
-
     try {
-      const targetPathStat = await stat(targetPath)
+      const targetPathStat = await stat(appRootPath)
       if (!targetPathStat.isDirectory())
-        throw new Error(`${targetPath} must to be a directory`)
+        throw new Error(`${appRootPath} must to be a directory`)
     }
     catch (error) {
-      await mkdir(targetPath)
-      const templatePath = resolve(__dirname, 'template', '.react-web')
-      copySync(templatePath, targetPath)
+      await mkdir(appRootPath)
+      const templatePath = resolve(__dirname, 'template', appRootName)
+      copySync(templatePath, appRootPath)
       await unlink(resolve(cwd, 'node_modules'))
       await exec({ cli: 'npm run install', cwd })
     }
