@@ -1,7 +1,7 @@
 {
-  "name": "react-web-command",
+  "name": "create-react-web",
   "type": "module",
-  "version": "0.0.2-alpha",
+  "version": "0.0.1",
   "packageManager": "pnpm@8.7.0",
   "description": "_description_",
   "license": "MIT",
@@ -35,6 +35,7 @@
     "build": "unbuild && npm run copyTmp",
     "dev": "unbuild --stub && npm run copyTmp",
     "lint": "eslint .",
+    "test": "sudo vitest run",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
     "typecheck": "tsc --noEmit",

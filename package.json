@@ -1,12 +1,13 @@
 {
-  "name": "react-web",
+  "name": "create-react-web-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r --filter react-web-command build",
-    "lint": "pnpm -r --filter react-web-command lint",
-    "typecheck": "pnpm -r --filter react-web-command typecheck",
-    "lint-staged": "pnpm -r --filter react-web-command lint-staged"
+    "build": "pnpm -r --filter create-react-web build",
+    "test": "pnpm -r --filter create-react-web test",
+    "lint": "pnpm -r --filter create-react-web lint",
+    "typecheck": "pnpm -r --filter create-react-web typecheck",
+    "lint-staged": "pnpm -r --filter create-react-web lint-staged"
   }
 }
