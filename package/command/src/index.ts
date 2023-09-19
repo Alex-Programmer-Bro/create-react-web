@@ -88,7 +88,7 @@ program
     await exec({ cli: 'npm run build && npm run preview', cwd: appRootPath })
   })
 
-async function checkDevStack() {
+async function verifyApp() {
   try {
     const pkgPath = resolve(cwd, 'package.json')
 
@@ -112,16 +112,16 @@ async function checkDevStack() {
       await mkdir(appRootPath)
       const templatePath = resolve(__dirname, 'template', appRootName)
       copySync(templatePath, appRootPath)
-      await unlink(resolve(cwd, 'node_modules'))
       await exec({ cli: 'npm run install', cwd })
     }
   }
   catch (error) {
+    throw new Error((error as Error).message)
   }
 }
 
 program.hook('preAction', async () => {
-  await checkDevStack()
+  await verifyApp()
 })
 
 program.parse()
