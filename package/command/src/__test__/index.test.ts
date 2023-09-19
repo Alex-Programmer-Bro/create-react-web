@@ -4,7 +4,7 @@ import { rm } from 'node:fs/promises'
 import { beforeEach, describe, it } from 'vitest'
 import { exec } from '../tool'
 
-const template = resolve(homedir(), '.create-react-web-temp')
+const template = resolve(homedir(), '.create-react-command-temp')
 const timeout = 1000 * 60 * 3
 
 beforeEach(async () => {
@@ -14,7 +14,7 @@ beforeEach(async () => {
   catch (error) {
 
   }
-  await exec({ cli: 'npm uninstall create-react-web -g && npm link' })
+  await exec({ cli: 'npm uninstall create-react-command -g && npm link' })
 })
 
 describe('create react web', () => {

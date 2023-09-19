@@ -1,13 +1,13 @@
 {
-  "name": "create-react-web-app",
+  "name": "create-react-command-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r --filter create-react-web build",
-    "test": "pnpm -r --filter create-react-web test",
-    "lint": "pnpm -r --filter create-react-web lint",
-    "typecheck": "pnpm -r --filter create-react-web typecheck",
-    "lint-staged": "pnpm -r --filter create-react-web lint-staged"
+    "build": "pnpm -r --filter create-react-command build",
+    "test": "pnpm -r --filter create-react-command test",
+    "lint": "pnpm -r --filter create-react-command lint",
+    "typecheck": "pnpm -r --filter create-react-command typecheck",
+    "lint-staged": "pnpm -r --filter create-react-command lint-staged"
   }
 }
