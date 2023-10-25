@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import process from 'node:process'
 import { mkdir, readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import process from 'node:process'
+import chalk from 'chalk'
 import { Command } from 'commander'
 import { copySync, symlink, unlink } from 'fs-extra'
-import chalk from 'chalk'
 import pkg from '../package.json'
 import { exec, log } from './tool'
 
@@ -120,7 +120,10 @@ async function verifyApp() {
   }
 }
 
-program.hook('preAction', async () => {
+program.hook('preAction', async (_, actionCommand) => {
+  if (actionCommand.name() === 'create')
+    return
+
   await verifyApp()
 })
 
