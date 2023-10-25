@@ -1,7 +1,7 @@
 {
   "name": "create-react-command",
   "type": "module",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "packageManager": "pnpm@8.7.0",
   "description": "_description_",
   "license": "MIT",
